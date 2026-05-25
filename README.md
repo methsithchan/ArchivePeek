@@ -2,7 +2,7 @@
 
 # ArchivePeek
 
-**Quick Look inside your archives — without touching them.**
+**Quick Look inside your archives, without touching them.**
 
 Select a ZIP, RAR, 7z, or tarball in Finder. Press Space. Done.
 
