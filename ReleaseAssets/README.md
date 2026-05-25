@@ -9,8 +9,10 @@ ReleaseAssets/DMGBackground.png
 Recommended size:
 
 ```text
-800 x 480 px
+3200 x 1920 px
 ```
+
+The DMG window is `800 x 480` points. Use `3200 x 1920` source artwork for easy editing; the script embeds it as a `1600 x 960`, `144 DPI` Retina Finder background.
 
 The DMG script will use this PNG automatically. Keep the background as artwork only; Finder will place the real `ArchivePeek.app` icon and the real `Applications` shortcut on top.
 

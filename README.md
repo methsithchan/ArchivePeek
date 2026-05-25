@@ -87,7 +87,7 @@ To use your own installer background, save a PNG at:
 ReleaseAssets/DMGBackground.png
 ```
 
-Recommended size is `800 x 480 px`. The script will place the real `ArchivePeek.app` and `Applications` icons on top, so do not bake those icons or their labels into the background unless you intentionally want overlap.
+Recommended source size is `3200 x 1920 px` for easy editing. The script embeds it as a `1600 x 960 px`, `144 DPI` Retina Finder background for the default `800 x 480` installer window, then places the real `ArchivePeek.app` and `Applications` icons on top, so do not bake those icons or their labels into the background unless you intentionally want overlap.
 
 The DMG is written to:
 
