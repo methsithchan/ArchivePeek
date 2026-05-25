@@ -1,130 +1,165 @@
+<div align="center">
+
 # ArchivePeek
 
-ArchivePeek is a native macOS Quick Look extension for browsing archive contents without extracting the whole file first.
+**Quick Look inside your archives — without touching them.**
 
-Select an archive in Finder, press Space, and inspect the files inside. You can expand folders, copy or extract selected items, and keep the archive intact.
+Select a ZIP, RAR, 7z, or tarball in Finder. Press Space. Done.
 
-## Features
+![ArchivePeek in action](ReleaseAssets/demo.gif)
 
-- Quick Look previews for archive files directly in Finder
-- Finder-style file list with folders, sizes, kinds, and modified dates
-- Expand folders inside an archive without unpacking everything
-- Extract only the selected file or folder
-- Copy selected archive contents to Finder by staging a real temporary file or folder
-- Supports common archive formats through libarchive
+</div>
 
-## Supported Formats
+---
 
-ArchivePeek registers support for archive content types including:
+## The problem
 
-- ZIP
-- RAR
-- 7z
-- TAR
-- TGZ / GZip tarballs
-- GZ
-- BZip2 archives
+Every time you want to peek inside an archive, you extract the whole thing — only to find it's the wrong file, or you only needed one folder. You clean up, try again.
 
-Support depends on the libarchive capabilities available on the user's macOS installation.
+ArchivePeek fixes that. It hooks into macOS Quick Look so you can browse archive contents directly in Finder, expand folders, and extract *only what you need* — without touching the archive itself.
 
-## Requirements
+No new window to open. No app to launch. Just press **Space**.
 
-- macOS 15.0 or later
-- Xcode 16 or later for building from source
-- Swift 6
+---
 
-## Install From a Release
+## What you can do
 
-1. Download the latest `.dmg` from the GitHub Releases page.
-2. Open the DMG.
-3. Drag `ArchivePeek.app` into `Applications`.
-4. Open `ArchivePeek.app` once.
-5. Click `Enable Extension`.
-6. In System Settings, enable ArchivePeek under Quick Look extensions.
-7. In Finder, select an archive and press Space.
+| Action | How |
+|---|---|
+| Browse any archive | Select it in Finder, press Space |
+| Expand folders | Click the chevron — no extraction needed |
+| Search inside | Type to filter across the entire archive tree |
+| Extract a single file | Right-click → Extract Selected... |
+| Copy to Finder | Right-click → Copy (or ⌘C) — pastes as a real file |
+| Navigate deep folders | Breadcrumb bar at the bottom |
 
-If the extension does not appear immediately, log out and back in, or run:
+---
 
-```sh
-qlmanage -r
-pluginkit -m | grep ArchivePeek
-```
+## Supported formats
 
-## Build From Source
+`ZIP` `RAR` `7z` `TAR` `TGZ` `GZ` `BZ2`
 
-Clone the repository:
+Powered by **libarchive** — the same library used by BSD tar and countless other tools. Format support reflects whatever libarchive version ships with your macOS installation.
+
+---
+
+## Install
+
+### From a release (recommended)
+
+1. Download the latest `.dmg` from [Releases](https://github.com/methsithchan/ArchivePeek/releases)
+2. Open the DMG and drag **ArchivePeek.app** to Applications
+3. Launch ArchivePeek once and click **Enable Extension**
+4. In System Settings → General → Login Items & Extensions → Quick Look, enable ArchivePeek
+
+Now go to Finder, select any archive, and hit Space.
+
+> **Note:** Distributed without an Apple Developer ID signature, so on first launch you may need to right-click → Open to bypass Gatekeeper. This is a one-time step.
+
+### From source
+
+Requirements: macOS 15, Xcode 16, Swift 6
 
 ```sh
 git clone https://github.com/methsithchan/ArchivePeek.git
 cd ArchivePeek
-```
-
-Build with Xcode:
-
-```sh
-xcodebuild -project ArchivePeek.xcodeproj -scheme ArchivePeek -configuration Debug build
-```
-
-Or open the project:
-
-```sh
 open ArchivePeek.xcodeproj
 ```
 
-The app target embeds the `ArchivePeekPreview` Quick Look extension.
+Build the `ArchivePeek` scheme, then run it once from Xcode to register the extension.
 
-## Creating a DMG
+The project uses [XcodeGen](https://github.com/yonaskolb/XcodeGen) — if you want to regenerate `project.pbxproj` from `project.yml`, install XcodeGen and run `xcodegen generate`.
 
-For a GitHub release, build the app and package it in a DMG with an Applications shortcut:
+---
 
-```sh
-Scripts/create_dmg.sh
-```
+## How it works
 
-To use your own installer background, save a PNG at:
+ArchivePeek is a native macOS Quick Look extension — it never runs as a standalone app. When you press Space on an archive, macOS launches the extension inside its own sandboxed process.
 
 ```text
-ReleaseAssets/DMGBackground.png
+Finder (Space) ──► macOS Quick Look server ──► ArchivePeekPreview extension
+                                                         │
+                                              ArchiveReader (Swift actor)
+                                                         │
+                                              libarchive (C, streaming)
+                                                         │
+                                              ArchiveNode tree (immutable)
+                                                         │
+                                              PreviewContentView (SwiftUI)
 ```
 
-Recommended source size is `3200 x 1920 px` for easy editing. The script embeds it as a `1600 x 960 px`, `144 DPI` Retina Finder background for the default `800 x 480` installer window, then places the real `ArchivePeek.app` and `Applications` icons on top, so do not bake those icons or their labels into the background unless you intentionally want overlap.
+**The key design decisions:**
 
-The DMG is written to:
+- **`ArchiveReader` is a Swift actor.** libarchive is not thread-safe. The actor boundary ensures all archive reads are serialized without locks or manual synchronization.
+- **Stream-only reads.** `readTree()` walks the archive header stream without decompressing entry data. For a 2 GB archive, memory use stays flat because content is never loaded — just metadata.
+- **`ArchiveNode` is immutable and `Sendable`.** The tree is built via a mutable inner class during parsing, then converted to an immutable value type. This means the SwiftUI view layer can never accidentally mutate archive state.
+- **Targeted extraction.** When you extract or copy a single file, `ArchiveReader` re-opens and streams the archive from scratch, skipping entries until it hits the target path. Slightly slower than random access, but it keeps the implementation simple and correct across all libarchive-supported formats.
+
+---
+
+## Project structure
 
 ```text
-dist/ArchivePeek-1.0.dmg
+ArchivePeek/              Container app — onboarding UI only
+ArchivePeekPreview/       Quick Look extension
+  ArchiveReader.swift       libarchive bridge (Swift actor)
+  ArchiveNode.swift         Immutable archive tree model
+  PreviewContentView.swift  SwiftUI preview UI
+  PreviewViewController.swift  QLPreviewingController glue
+Headers/libarchive/       libarchive C headers
+Scripts/                  DMG packaging script
+project.yml               XcodeGen project definition
 ```
 
-Without a paid Apple Developer account, ArchivePeek can still be shared on GitHub, but the DMG will not be Developer ID signed or notarized. Users may need to right-click `ArchivePeek.app`, choose `Open`, and confirm the first launch.
-
-For the smoothest public distribution outside the App Store, sign and notarize the app before publishing the DMG.
+---
 
 ## Troubleshooting
 
-If Quick Look still shows the default ZIP preview:
+**Quick Look still shows the default ZIP preview**
 
 ```sh
 qlmanage -r
 qlmanage -r cache
 ```
 
-Then reopen Finder or log out and back in.
+Then reopen Finder, or log out and back in.
 
-If the extension is installed but disabled, open ArchivePeek and use `Enable Extension`, or go to:
+**Extension not showing up in System Settings**
 
-```text
-System Settings > General > Login Items & Extensions > Quick Look
+```sh
+pluginkit -m | grep ArchivePeek
 ```
 
-## Project Structure
+If it's not listed, re-run the app. If it's listed but disabled, open System Settings → General → Login Items & Extensions → Quick Look and enable it manually.
 
-```text
-ArchivePeek/            macOS container app and onboarding UI
-ArchivePeekPreview/     Quick Look extension, archive reader, and preview UI
-Headers/libarchive/     libarchive headers used by the Swift bridge
-project.yml             XcodeGen project definition
-```
+---
 
-## Status
+## Roadmap
 
-ArchivePeek is early software. The core Quick Look browsing, selected extraction, and copy-to-Finder flow are working, but release signing and notarization still need to be configured before publishing a production DMG.
+- [ ] Code signing & notarization for frictionless first launch
+- [ ] Forward navigation button (back/forward like Finder)
+- [ ] File preview panel (inline image and text previews)
+- [ ] Compression ratio and total size stats
+- [ ] XZ / ZSTD format support
+
+---
+
+## Contributing
+
+Issues and PRs are welcome. For larger changes, open an issue first to discuss the direction.
+
+The project is early but the core (Quick Look integration, libarchive bridge, tree navigation, extraction) is solid. Good first areas: format edge cases, accessibility improvements, and UI polish.
+
+---
+
+## License
+
+MIT — see [LICENSE](LICENSE).
+
+---
+
+<div align="center">
+
+Built with Swift 6 and libarchive · Runs entirely in the macOS Quick Look sandbox · No telemetry, no network requests, no background processes
+
+</div>
