@@ -12,6 +12,7 @@
 		36A7B870B2BB014D67C21429 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C24B376080BB7CD985DFBF4 /* PreviewViewController.swift */; };
 		446FC56F1D4F3BD90B803483 /* ArchivePeekApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D4E6AB624C01A508C91C6D /* ArchivePeekApp.swift */; };
 		6A98639D369A2758C35ECD4A /* PreviewContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90899C859B2D50A188AD95FD /* PreviewContentView.swift */; };
+		83AC3B9F6D3E45B0A3824765 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B8F6D23001F4D0DB1FE7E28 /* Assets.xcassets */; };
 		BB13C4DF7F9B13BCF15A1186 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5267E15BFCAE2BDF56B9E01E /* OnboardingView.swift */; };
 		D1A9BAE07D84FFB8D2D3DD1C /* ArchiveReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A39DBED30DD8E697E9ED70A /* ArchiveReader.swift */; };
 /* End PBXBuildFile section */
@@ -47,6 +48,7 @@
 		5267E15BFCAE2BDF56B9E01E /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		6C24B376080BB7CD985DFBF4 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		6CF999D1F9C54425D25FE75E /* ArchivePeek.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArchivePeek.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B8F6D23001F4D0DB1FE7E28 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8A39DBED30DD8E697E9ED70A /* ArchiveReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveReader.swift; sourceTree = "<group>"; };
 		90899C859B2D50A188AD95FD /* PreviewContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContentView.swift; sourceTree = "<group>"; };
 		A09CDD3E57242E643752BA46 /* ArchiveNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveNode.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 			isa = PBXGroup;
 			children = (
 				B5D4E6AB624C01A508C91C6D /* ArchivePeekApp.swift */,
+				7B8F6D23001F4D0DB1FE7E28 /* Assets.xcassets */,
 				2EA84071A72366CDADC18697 /* Info.plist */,
 				5267E15BFCAE2BDF56B9E01E /* OnboardingView.swift */,
 			);
@@ -104,6 +107,7 @@
 			buildConfigurationList = 25A5FC806B4AB9AD10023D35 /* Build configuration list for PBXNativeTarget "ArchivePeek" */;
 			buildPhases = (
 				7674805789B098AE693F3951 /* Sources */,
+				2CE34248780C4BCFB85A2E22 /* Resources */,
 				8F6CBB37C44CAB73964F6347 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
@@ -165,6 +169,17 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2CE34248780C4BCFB85A2E22 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83AC3B9F6D3E45B0A3824765 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		061148F05F863D6FF461BBDE /* Sources */ = {

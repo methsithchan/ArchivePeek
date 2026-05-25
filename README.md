@@ -75,16 +75,21 @@ The app target embeds the `ArchivePeekPreview` Quick Look extension.
 
 ## Creating a DMG
 
-For a GitHub release, archive or export a signed `ArchivePeek.app`, then package it in a DMG with an Applications shortcut. A simple local DMG can be created with:
+For a GitHub release, build the app and package it in a DMG with an Applications shortcut:
 
 ```sh
-mkdir -p dist/dmg-root
-cp -R /path/to/ArchivePeek.app dist/dmg-root/
-ln -s /Applications dist/dmg-root/Applications
-hdiutil create -volname ArchivePeek -srcfolder dist/dmg-root -ov -format UDZO dist/ArchivePeek.dmg
+Scripts/create_dmg.sh
 ```
 
-For public distribution outside the App Store, sign and notarize the app before publishing the DMG.
+The DMG is written to:
+
+```text
+dist/ArchivePeek-1.0.dmg
+```
+
+Without a paid Apple Developer account, ArchivePeek can still be shared on GitHub, but the DMG will not be Developer ID signed or notarized. Users may need to right-click `ArchivePeek.app`, choose `Open`, and confirm the first launch.
+
+For the smoothest public distribution outside the App Store, sign and notarize the app before publishing the DMG.
 
 ## Troubleshooting
 
@@ -115,4 +120,3 @@ project.yml             XcodeGen project definition
 ## Status
 
 ArchivePeek is early software. The core Quick Look browsing, selected extraction, and copy-to-Finder flow are working, but release signing and notarization still need to be configured before publishing a production DMG.
-
