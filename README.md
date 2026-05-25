@@ -81,6 +81,14 @@ For a GitHub release, build the app and package it in a DMG with an Applications
 Scripts/create_dmg.sh
 ```
 
+To use your own installer background, save a PNG at:
+
+```text
+ReleaseAssets/DMGBackground.png
+```
+
+Recommended size is `800 x 480 px`. The script will place the real `ArchivePeek.app` and `Applications` icons on top, so do not bake those icons or their labels into the background unless you intentionally want overlap.
+
 The DMG is written to:
 
 ```text
