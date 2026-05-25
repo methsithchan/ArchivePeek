@@ -1,0 +1,49 @@
+name: ArchivePeek
+options:
+  bundleIdPrefix: com.archivepeek
+  developmentKeys: true
+targets:
+  ArchivePeek:
+    type: application
+    platform: macOS
+    deploymentTarget: "15.0"
+    sources:
+      - path: ArchivePeek
+    dependencies:
+      - target: ArchivePeekPreview
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.archivepeek.app
+      CODE_SIGN_ENTITLEMENTS: ArchivePeek.entitlements
+      INFOPLIST_FILE: ArchivePeek/Info.plist
+      SWIFT_VERSION: "6.0"
+      MACOSX_DEPLOYMENT_TARGET: "15.0"
+
+  ArchivePeekPreview:
+    type: app-extension
+    platform: macOS
+    deploymentTarget: "15.0"
+    sources:
+      - path: ArchivePeekPreview
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.archivepeek.app.preview
+      CODE_SIGN_ENTITLEMENTS: ArchivePeek.entitlements
+      INFOPLIST_FILE: ArchivePeekPreview/Info.plist
+      SWIFT_VERSION: "6.0"
+      MACOSX_DEPLOYMENT_TARGET: "15.0"
+      SWIFT_OBJC_BRIDGING_HEADER: ArchivePeekPreview/BridgingHeader.h
+      HEADER_SEARCH_PATHS: $(inherited) $(PROJECT_DIR)/Headers
+      OTHER_LDFLAGS: $(inherited) -larchive
+
+schemes:
+  ArchivePeek:
+    build:
+      targets:
+        ArchivePeek: all
+    run:
+      target: ArchivePeek
+  ArchivePeekPreview:
+    build:
+      targets:
+        ArchivePeekPreview: all
+    run:
+      target: ArchivePeekPreview

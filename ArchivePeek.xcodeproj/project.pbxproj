@@ -1,0 +1,429 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		01DEC43715E391C947CD80B0 /* ArchiveNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09CDD3E57242E643752BA46 /* ArchiveNode.swift */; };
+		14B899068BC16F1471C0812E /* ArchivePeekPreview.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = D1B96E0158ED4CF4A01AB3E6 /* ArchivePeekPreview.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		36A7B870B2BB014D67C21429 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C24B376080BB7CD985DFBF4 /* PreviewViewController.swift */; };
+		446FC56F1D4F3BD90B803483 /* ArchivePeekApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D4E6AB624C01A508C91C6D /* ArchivePeekApp.swift */; };
+		6A98639D369A2758C35ECD4A /* PreviewContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90899C859B2D50A188AD95FD /* PreviewContentView.swift */; };
+		BB13C4DF7F9B13BCF15A1186 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5267E15BFCAE2BDF56B9E01E /* OnboardingView.swift */; };
+		D1A9BAE07D84FFB8D2D3DD1C /* ArchiveReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A39DBED30DD8E697E9ED70A /* ArchiveReader.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4D42B47CD2359DAE41E56B0D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8E317AFFA96951D461E303A4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D12C5710F6007F026DEA4059;
+			remoteInfo = ArchivePeekPreview;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8F6CBB37C44CAB73964F6347 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				14B899068BC16F1471C0812E /* ArchivePeekPreview.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		2E84B5C9D03A14E025287428 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
+		2EA84071A72366CDADC18697 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		46A0CE536DAF9B09463ABCA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		5267E15BFCAE2BDF56B9E01E /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		6C24B376080BB7CD985DFBF4 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
+		6CF999D1F9C54425D25FE75E /* ArchivePeek.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArchivePeek.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A39DBED30DD8E697E9ED70A /* ArchiveReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveReader.swift; sourceTree = "<group>"; };
+		90899C859B2D50A188AD95FD /* PreviewContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContentView.swift; sourceTree = "<group>"; };
+		A09CDD3E57242E643752BA46 /* ArchiveNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveNode.swift; sourceTree = "<group>"; };
+		B5D4E6AB624C01A508C91C6D /* ArchivePeekApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivePeekApp.swift; sourceTree = "<group>"; };
+		D1B96E0158ED4CF4A01AB3E6 /* ArchivePeekPreview.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ArchivePeekPreview.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0609F922BFC1A039EF5CB952 /* ArchivePeek */ = {
+			isa = PBXGroup;
+			children = (
+				B5D4E6AB624C01A508C91C6D /* ArchivePeekApp.swift */,
+				2EA84071A72366CDADC18697 /* Info.plist */,
+				5267E15BFCAE2BDF56B9E01E /* OnboardingView.swift */,
+			);
+			path = ArchivePeek;
+			sourceTree = "<group>";
+		};
+		11FE01503DAF272E30F4DA67 = {
+			isa = PBXGroup;
+			children = (
+				0609F922BFC1A039EF5CB952 /* ArchivePeek */,
+				D7E970D6E697EE4F9878153E /* ArchivePeekPreview */,
+				7AA72C052546C2E184CBD057 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7AA72C052546C2E184CBD057 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6CF999D1F9C54425D25FE75E /* ArchivePeek.app */,
+				D1B96E0158ED4CF4A01AB3E6 /* ArchivePeekPreview.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D7E970D6E697EE4F9878153E /* ArchivePeekPreview */ = {
+			isa = PBXGroup;
+			children = (
+				A09CDD3E57242E643752BA46 /* ArchiveNode.swift */,
+				8A39DBED30DD8E697E9ED70A /* ArchiveReader.swift */,
+				2E84B5C9D03A14E025287428 /* BridgingHeader.h */,
+				46A0CE536DAF9B09463ABCA2 /* Info.plist */,
+				90899C859B2D50A188AD95FD /* PreviewContentView.swift */,
+				6C24B376080BB7CD985DFBF4 /* PreviewViewController.swift */,
+			);
+			path = ArchivePeekPreview;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8FF82EBB733DEE90652EC635 /* ArchivePeek */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 25A5FC806B4AB9AD10023D35 /* Build configuration list for PBXNativeTarget "ArchivePeek" */;
+			buildPhases = (
+				7674805789B098AE693F3951 /* Sources */,
+				8F6CBB37C44CAB73964F6347 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0B390B165F49482794D5E1D2 /* PBXTargetDependency */,
+			);
+			name = ArchivePeek;
+			packageProductDependencies = (
+			);
+			productName = ArchivePeek;
+			productReference = 6CF999D1F9C54425D25FE75E /* ArchivePeek.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D12C5710F6007F026DEA4059 /* ArchivePeekPreview */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9F39337CF5CBE5CC0C0A8EF7 /* Build configuration list for PBXNativeTarget "ArchivePeekPreview" */;
+			buildPhases = (
+				061148F05F863D6FF461BBDE /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ArchivePeekPreview;
+			packageProductDependencies = (
+			);
+			productName = ArchivePeekPreview;
+			productReference = D1B96E0158ED4CF4A01AB3E6 /* ArchivePeekPreview.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8E317AFFA96951D461E303A4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = 718073AE0CC67A82BDE39CE5 /* Build configuration list for PBXProject "ArchivePeek" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 11FE01503DAF272E30F4DA67;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 7AA72C052546C2E184CBD057 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8FF82EBB733DEE90652EC635 /* ArchivePeek */,
+				D12C5710F6007F026DEA4059 /* ArchivePeekPreview */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		061148F05F863D6FF461BBDE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01DEC43715E391C947CD80B0 /* ArchiveNode.swift in Sources */,
+				D1A9BAE07D84FFB8D2D3DD1C /* ArchiveReader.swift in Sources */,
+				6A98639D369A2758C35ECD4A /* PreviewContentView.swift in Sources */,
+				36A7B870B2BB014D67C21429 /* PreviewViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7674805789B098AE693F3951 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				446FC56F1D4F3BD90B803483 /* ArchivePeekApp.swift in Sources */,
+				BB13C4DF7F9B13BCF15A1186 /* OnboardingView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0B390B165F49482794D5E1D2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D12C5710F6007F026DEA4059 /* ArchivePeekPreview */;
+			targetProxy = 4D42B47CD2359DAE41E56B0D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		32D8E21D5173C82CA4D8773C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ArchivePeek.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				HEADER_SEARCH_PATHS = "$(inherited) $(PROJECT_DIR)/Headers";
+				INFOPLIST_FILE = ArchivePeekPreview/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				OTHER_LDFLAGS = "$(inherited) -larchive";
+				PRODUCT_BUNDLE_IDENTIFIER = com.archivepeek.app.preview;
+				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = ArchivePeekPreview/BridgingHeader.h;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		418FE57DEE8DCA3280BC583C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ArchivePeek.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ArchivePeek/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.archivepeek.app;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		4FB2D9E1C50099A34D61A5DF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		592962BD2FB34BF65DBBADCA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		5AE4B3A7EDACF1C91E226A63 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ArchivePeek.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ArchivePeek/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.archivepeek.app;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		FC1E600CBA1DEA792B5C2673 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ArchivePeek.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				HEADER_SEARCH_PATHS = "$(inherited) $(PROJECT_DIR)/Headers";
+				INFOPLIST_FILE = ArchivePeekPreview/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				OTHER_LDFLAGS = "$(inherited) -larchive";
+				PRODUCT_BUNDLE_IDENTIFIER = com.archivepeek.app.preview;
+				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = ArchivePeekPreview/BridgingHeader.h;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		25A5FC806B4AB9AD10023D35 /* Build configuration list for PBXNativeTarget "ArchivePeek" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				418FE57DEE8DCA3280BC583C /* Debug */,
+				5AE4B3A7EDACF1C91E226A63 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		718073AE0CC67A82BDE39CE5 /* Build configuration list for PBXProject "ArchivePeek" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				592962BD2FB34BF65DBBADCA /* Debug */,
+				4FB2D9E1C50099A34D61A5DF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		9F39337CF5CBE5CC0C0A8EF7 /* Build configuration list for PBXNativeTarget "ArchivePeekPreview" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				32D8E21D5173C82CA4D8773C /* Debug */,
+				FC1E600CBA1DEA792B5C2673 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8E317AFFA96951D461E303A4 /* Project object */;
+}
