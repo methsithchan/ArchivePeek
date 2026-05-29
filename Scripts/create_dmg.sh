@@ -4,7 +4,7 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 DERIVED_DATA_PATH="/private/tmp/ArchivePeekDerivedData"
 WORK_DIR="$(mktemp -d /private/tmp/archivepeek-dmg.XXXXXX)"
-DMG_PATH="$ROOT_DIR/dist/ArchivePeek-1.0.dmg"
+DMG_PATH="$ROOT_DIR/dist/ArchivePeek-2.0.dmg"
 RW_DMG_PATH="$WORK_DIR/ArchivePeek-rw.dmg"
 VOLUME_NAME="ArchivePeek"
 MOUNT_DIR="/Volumes/$VOLUME_NAME"

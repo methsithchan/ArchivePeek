@@ -7,80 +7,87 @@ struct OnboardingView: View {
 
             Divider()
 
-            VStack(alignment: .leading, spacing: 16) {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("Set up ArchivePeek")
-                        .font(.system(size: 28, weight: .semibold))
+            VStack(alignment: .leading, spacing: 0) {
+                VStack(alignment: .leading, spacing: 16) {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Set up ArchivePeek")
+                            .font(.system(size: 28, weight: .semibold))
 
-                    Text("Preview archive contents from Finder without uncompressing the whole file.")
-                        .font(.callout)
-                        .foregroundStyle(.secondary)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-
-                VStack(spacing: 10) {
-                    SetupStepRow(
-                        symbol: "switch.2",
-                        title: "Enable the Quick Look extension",
-                        detail: "Open System Settings, then turn on ArchivePeek under Quick Look extensions.",
-                        actionTitle: "Open Settings",
-                        action: openExtensionSettings
-                    )
-
-                    SetupStepRow(
-                        symbol: "archivebox",
-                        title: "Select an archive in Finder",
-                        detail: "ZIP, RAR, 7z, TAR, TGZ, and GZ archives can be inspected from Quick Look.",
-                        actionTitle: nil,
-                        action: nil
-                    )
-
-                    SetupStepRow(
-                        symbol: "space",
-                        title: "Press Space",
-                        detail: "Browse folders inside the archive, copy paths, and extract a selected item when needed.",
-                        actionTitle: nil,
-                        action: nil
-                    )
-                }
-
-                VStack(alignment: .leading, spacing: 10) {
-                    Text("Supported formats")
-                        .font(.headline)
-
-                    HStack(spacing: 8) {
-                        FormatPill("ZIP")
-                        FormatPill("RAR")
-                        FormatPill("7z")
-                        FormatPill("TAR")
-                        FormatPill("TGZ")
-                        FormatPill("GZ")
-                    }
-                }
-                .padding(12)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .background(.quaternary.opacity(0.45), in: RoundedRectangle(cornerRadius: 10))
-
-                Spacer(minLength: 4)
-
-                HStack(spacing: 12) {
-                    Button(action: openDocumentation) {
-                        Label("Documentation", systemImage: "book")
+                        Text("Preview archive contents from Finder without uncompressing the whole file.")
+                            .font(.callout)
+                            .foregroundStyle(.secondary)
+                            .fixedSize(horizontal: false, vertical: true)
                     }
 
-                    Spacer()
+                    VStack(spacing: 10) {
+                        SetupStepRow(
+                            symbol: "switch.2",
+                            title: "Enable the Quick Look extension",
+                            detail: "Open System Settings, then turn on ArchivePeek under Quick Look extensions.",
+                            actionTitle: "Open Settings",
+                            action: openExtensionSettings
+                        )
 
-                    Button(action: openExtensionSettings) {
-                        Label("Enable Extension", systemImage: "gearshape")
+                        SetupStepRow(
+                            symbol: "archivebox",
+                            title: "Select an archive in Finder",
+                            detail: "ZIP, RAR, 7z, TAR, TGZ, and GZ archives can be inspected from Quick Look.",
+                            actionTitle: nil,
+                            action: nil
+                        )
+
+                        SetupStepRow(
+                            symbol: "space",
+                            title: "Press Space",
+                            detail: "Browse folders inside the archive, copy paths, and extract a selected item when needed.",
+                            actionTitle: nil,
+                            action: nil
+                        )
                     }
-                    .buttonStyle(.borderedProminent)
-                    .keyboardShortcut(.defaultAction)
+                    .layoutPriority(1)
+
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("Supported formats")
+                            .font(.headline)
+
+                        HStack(spacing: 8) {
+                            FormatPill("ZIP")
+                            FormatPill("RAR")
+                            FormatPill("7z")
+                            FormatPill("TAR")
+                            FormatPill("TGZ")
+                            FormatPill("GZ")
+                        }
+                    }
+                    .padding(12)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(.quaternary.opacity(0.45), in: RoundedRectangle(cornerRadius: 10))
                 }
-                .controlSize(.large)
+
+                VStack(spacing: 0) {
+                    Spacer(minLength: 24)
+
+                    HStack(spacing: 12) {
+                        Button(action: openDocumentation) {
+                            Label("Documentation", systemImage: "book")
+                        }
+
+                        Spacer()
+
+                        Button(action: openExtensionSettings) {
+                            Label("Enable Extension", systemImage: "gearshape")
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .keyboardShortcut(.defaultAction)
+                    }
+                    .controlSize(.large)
+
+                    Spacer(minLength: 24)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
             .padding(.horizontal, 34)
-            .padding(.top, 24)
-            .padding(.bottom, 22)
+            .padding(.top, 16)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             .background(Color(nsColor: .windowBackgroundColor))
         }
@@ -124,7 +131,7 @@ private struct SidebarSummary: View {
 
             Spacer()
 
-            Text("Version 1.0")
+            Text("Version 2.0")
                 .font(.caption)
                 .foregroundStyle(.tertiary)
         }
@@ -184,9 +191,8 @@ private struct SetupStepRow: View {
                 .font(.system(size: 18, weight: .medium))
                 .foregroundStyle(.secondary)
                 .frame(width: 28, height: 28)
-                .padding(.top, 4)
 
-            VStack(alignment: .leading, spacing: 3) {
+            VStack(alignment: .leading, spacing: 4) {
                 Text(title)
                     .font(.headline)
 
@@ -195,20 +201,18 @@ private struct SetupStepRow: View {
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
             }
-            .padding(.top, 2)
 
             Spacer(minLength: 12)
 
             if let actionTitle, let action {
                 Button(actionTitle, action: action)
                     .controlSize(.small)
-                    .padding(.top, 4)
             }
         }
         .padding(.horizontal, 14)
-        .padding(.vertical, 16)
-        .frame(minHeight: 78)
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.vertical, 14)
+        .frame(maxWidth: .infinity, alignment: .topLeading)
+        .fixedSize(horizontal: false, vertical: true)
         .background(.quaternary.opacity(0.45), in: RoundedRectangle(cornerRadius: 10))
     }
 }

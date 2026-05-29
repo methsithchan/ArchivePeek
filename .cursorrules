@@ -1,0 +1,8 @@
+You are an expert macOS developer. All UI changes must use native SwiftUI components only (Table, NavigationSplitView, List). Avoid custom styling/colors. Use semantic colors, SF Symbols, and system materials (thickMaterial) for all backgrounds. Ensure the UI feels like a native Apple-designed macOS app.
+# UI/UX Rules for ArchivePeek
+- NEVER use custom backgrounds, borders, or hardcoded gray colors. 
+- ALWAYS use system materials: `.thickMaterial`, `.thinMaterial`, or `.windowBackground`.
+- ALWAYS use native SwiftUI components: `Table` for grids, `List` for stacks. 
+- DO NOT use manual `HStack` or `VStack` padding to simulate tables. Use native `TableColumn` with `TableStyle(.inset)`.
+- Use SF Symbols for ALL icons.
+- If a native component exists (e.g., `Table`), never build it from scratch using lower-level views.
