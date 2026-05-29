@@ -1,3 +1,4 @@
+import AppKit
 import SwiftUI
 
 struct OnboardingView: View {
@@ -146,16 +147,20 @@ private struct SidebarSummary: View {
 
 private struct AppMark: View {
     var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 13, style: .continuous)
-                .fill(Color.accentColor)
+        Image(nsImage: AppMark.icon)
+            .resizable()
+            .interpolation(.high)
+            .aspectRatio(contentMode: .fit)
+            .frame(width: 64, height: 64)
+            .shadow(color: .black.opacity(0.14), radius: 10, y: 5)
+    }
 
-            Image(systemName: "archivebox.fill")
-                .font(.system(size: 31, weight: .semibold))
-                .foregroundStyle(.white)
+    private static var icon: NSImage {
+        if let appIcon = NSApplication.shared.applicationIconImage,
+           appIcon.size.width > 0, appIcon.size.height > 0 {
+            return appIcon
         }
-        .frame(width: 64, height: 64)
-        .shadow(color: .black.opacity(0.14), radius: 10, y: 5)
+        return NSWorkspace.shared.icon(forFile: Bundle.main.bundlePath)
     }
 }
 

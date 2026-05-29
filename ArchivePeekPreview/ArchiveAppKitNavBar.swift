@@ -68,6 +68,16 @@ final class ArchiveAppKitNavBar: NSView {
         forwardButton.isEnabled = coordinator?.previewModel?.canGoForward ?? false
     }
 
+    override func mouseDown(with event: NSEvent) {
+        guard event.clickCount < 2 else { return }
+        super.mouseDown(with: event)
+    }
+
+    override func mouseUp(with event: NSEvent) {
+        guard event.clickCount < 2 else { return }
+        super.mouseUp(with: event)
+    }
+
     @objc private func backTapped() {
         coordinator?.previewModel?.navigateUp()
         updateState()
@@ -93,12 +103,23 @@ final class ArchiveAppKitNavBar: NSView {
     /// Fires on mouse-down so Quick Look never waits for double-click detection.
     private final class ImmediateButton: NSButton {
         var onMouseDown: (() -> Void)?
+        private var lastFireTime: TimeInterval = 0
 
         override func acceptsFirstMouse(for event: NSEvent?) -> Bool { true }
 
         override func mouseDown(with event: NSEvent) {
+            guard event.clickCount == 1 else { return }
             guard isEnabled else { return }
+
+            let now = ProcessInfo.processInfo.systemUptime
+            guard now - lastFireTime > 0.15 else { return }
+            lastFireTime = now
+
             onMouseDown?()
+        }
+
+        override func mouseUp(with event: NSEvent) {
+            guard event.clickCount < 2 else { return }
         }
     }
 }

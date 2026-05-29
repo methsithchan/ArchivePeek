@@ -41,22 +41,17 @@ struct ArchiveIconView: View {
     private func iconItem(for node: ArchiveNode) -> some View {
         let isSelected = selection.contains(node.id)
 
-        return Button {
-            onSelect(node, false)
-        } label: {
-            VStack(spacing: 6) {
-                ArchiveFileIcon(node: node, size: 64)
-                Text(node.name)
-                    .font(.caption)
-                    .multilineTextAlignment(.center)
-                    .lineLimit(2)
-            }
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 6)
-            .padding(.horizontal, 4)
-            .background(isSelected ? Color.accentColor.opacity(0.15) : .clear, in: RoundedRectangle(cornerRadius: 8))
+        return VStack(spacing: 6) {
+            ArchiveFileIcon(node: node, size: 64)
+            Text(node.name)
+                .font(.caption)
+                .multilineTextAlignment(.center)
+                .lineLimit(2)
         }
-        .buttonStyle(.plain)
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 6)
+        .padding(.horizontal, 4)
+        .background(isSelected ? Color.accentColor.opacity(0.15) : .clear, in: RoundedRectangle(cornerRadius: 8))
         .contextMenu {
             if node.isDirectory {
                 Button("Open") { onOpen(node) }

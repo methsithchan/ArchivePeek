@@ -16,9 +16,23 @@ Select a ZIP, RAR, 7z, or tarball in Finder. Press Space. Done.
 
 Every time you want to peek inside an archive, you extract the whole thing — only to find it's the wrong file, or you only needed one folder. You clean up, try again.
 
-ArchivePeek fixes that. It hooks into macOS Quick Look so you can browse archive contents directly in Finder, expand folders, and extract *only what you need* — without touching the archive itself.
+ArchivePeek fixes that. It hooks into macOS Quick Look so you can browse archive contents directly in Finder, open folders, and extract *only what you need* — without touching the archive itself.
 
 No new window to open. No app to launch. Just press **Space**.
+
+---
+
+## What's new in 2.0
+
+ArchivePeek 2.0 is a full UI refresh built to feel like browsing a folder in Finder — inside Quick Look.
+
+- **Finder-style icon grid** — large native file icons with names, system materials, and selection highlight
+- **In-window back/forward navigation** — AppKit chevrons at the top of the preview (Quick Look hides toolbars, so nav lives inside the panel)
+- **Double-click to open** — folders open in-place; files can be extracted with a save panel
+- **Keyboard shortcuts** — ← / → to navigate, ⌘C to copy the selected item
+- **Native file icons** — pulled from `NSWorkspace` / UTType, same as Finder
+- **Refreshed onboarding** — updated setup screen with the real app icon and v2.0 branding
+- **Snappier navigation** — back/forward and deep folder browsing no longer rebuild the whole grid on every click
 
 ---
 
@@ -27,11 +41,11 @@ No new window to open. No app to launch. Just press **Space**.
 | Action | How |
 |---|---|
 | Browse any archive | Select it in Finder, press Space |
-| Expand folders | Click the chevron — no extraction needed |
-| Search inside | Type to filter across the entire archive tree |
-| Extract a single file | Right-click → Extract Selected... |
-| Copy to Finder | Right-click → Copy (or ⌘C) — pastes as a real file |
-| Navigate deep folders | Breadcrumb bar at the bottom |
+| Open a folder | Double-click the folder icon |
+| Go back / forward | Click the chevrons or press ← / → |
+| Extract a file | Double-click, or right-click → Extract… |
+| Copy to Finder | Right-click → Copy (or ⌘C), then paste in Finder |
+| Select an item | Single-click an icon |
 
 ---
 
@@ -47,7 +61,7 @@ Powered by **libarchive** — the same library used by BSD tar and countless oth
 
 ### From a release (recommended)
 
-1. Download the latest `.dmg` from [Releases](https://github.com/methsithchan/ArchivePeek/releases)
+1. Download **ArchivePeek-2.0.dmg** from [Releases](https://github.com/methsithchan/ArchivePeek/releases)
 2. Open the DMG and drag **ArchivePeek.app** to Applications
 3. Launch ArchivePeek once and click **Enable Extension**
 4. In System Settings → General → Login Items & Extensions → Quick Look, enable ArchivePeek
@@ -104,6 +118,8 @@ ArchivePeek/              Container app — onboarding UI only
 ArchivePeekPreview/       Quick Look extension
   ArchiveReader.swift       libarchive bridge (Swift actor)
   ArchiveNode.swift         Immutable archive tree model
+  ArchiveIconView.swift     Finder-style icon grid
+  ArchiveAppKitNavBar.swift Native back/forward nav bar
   PreviewContentView.swift  SwiftUI preview UI
   PreviewViewController.swift  QLPreviewingController glue
 Headers/libarchive/       libarchive C headers
@@ -137,7 +153,6 @@ If it's not listed, re-run the app. If it's listed but disabled, open System Set
 ## Roadmap
 
 - [ ] Code signing & notarization for frictionless first launch
-- [ ] Forward navigation button (back/forward like Finder)
 - [ ] File preview panel (inline image and text previews)
 - [ ] Compression ratio and total size stats
 - [ ] XZ / ZSTD format support

@@ -72,6 +72,33 @@ final class ArchivePreviewModel: ObservableObject {
         lastSelectionTime = Date()
     }
 
+    /// Selects the icon under a click point. Used by AppKit mouse handling in Quick Look.
+    func selectNode(at point: CGPoint, in viewSize: CGSize) {
+        let contentY = point.y - headerHeight
+        guard contentY >= 0 else {
+            if !selectedNodeIds.isEmpty {
+                selectedNodeIds = []
+                lastSelectedNodeId = nil
+            }
+            return
+        }
+
+        let contentPoint = CGPoint(x: point.x, y: contentY)
+        guard let index = ArchiveIconGridLayout.nodeIndex(
+            at: contentPoint,
+            viewSize: CGSize(width: viewSize.width, height: viewSize.height - headerHeight),
+            nodeCount: displayedNodes.count
+        ) else {
+            if !selectedNodeIds.isEmpty {
+                selectedNodeIds = []
+                lastSelectedNodeId = nil
+            }
+            return
+        }
+
+        selectNode(displayedNodes[index], extendSelection: false)
+    }
+
     func activate(_ node: ArchiveNode) {
         let now = Date()
         guard now.timeIntervalSince(lastActivateTime) > 0.35 else { return }

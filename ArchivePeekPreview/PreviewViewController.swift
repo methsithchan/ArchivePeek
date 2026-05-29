@@ -5,15 +5,17 @@ import SwiftUI
 /// Principal class of the ArchivePeek Quick Look Extension, bridging macOS QuickLookUI with SwiftUI.
 public class PreviewViewController: NSViewController, @preconcurrency QLPreviewingController {
 
-    private var hostingController: NSHostingController<PreviewContentView>?
+    private var hostingController: FirstMouseHostingController<PreviewContentView>?
     private var rootView: ArchivePreviewRootView?
     private var navBar: ArchiveAppKitNavBar?
     private var doubleClickUpMonitor: Any?
+    private var clickMonitor: Any?
     private var keyDownMonitor: Any?
     private let coordinator = ArchivePreviewCoordinator()
 
     public override func viewWillDisappear() {
         super.viewWillDisappear()
+        removeClickMonitor()
         removeDoubleClickMonitor()
         removeKeyDownMonitor()
     }
@@ -61,7 +63,7 @@ public class PreviewViewController: NSViewController, @preconcurrency QLPreviewi
     private func installPreview(_ content: PreviewContentView) {
         tearDownContent()
 
-        let hosting = NSHostingController(rootView: content)
+        let hosting = FirstMouseHostingController(rootView: content)
         hosting.safeAreaRegions = []
 
         let nav = ArchiveAppKitNavBar(coordinator: coordinator)
@@ -82,8 +84,13 @@ public class PreviewViewController: NSViewController, @preconcurrency QLPreviewi
         navBar = nav
 
         bindNavBar(to: coordinator.previewModel)
+        installClickMonitor()
         installDoubleClickMonitor()
         installKeyDownMonitor()
+
+        DispatchQueue.main.async { [weak self] in
+            self?.view.window?.makeKey()
+        }
     }
 
     private func installError(_ errorView: ErrorContentView) {
@@ -102,6 +109,7 @@ public class PreviewViewController: NSViewController, @preconcurrency QLPreviewi
     }
 
     private func tearDownContent() {
+        removeClickMonitor()
         removeDoubleClickMonitor()
         removeKeyDownMonitor()
 
@@ -165,10 +173,44 @@ public class PreviewViewController: NSViewController, @preconcurrency QLPreviewi
         }
     }
 
+    private func installClickMonitor() {
+        removeClickMonitor()
+
+        // Quick Look eats the first SwiftUI click for window activation. Select in AppKit instead.
+        clickMonitor = NSEvent.addLocalMonitorForEvents(matching: [.leftMouseDown, .rightMouseDown]) { [weak self] event in
+            guard let self else { return event }
+            guard event.window === self.view.window else { return event }
+            guard let rootView = self.rootView else { return event }
+            guard let model = self.coordinator.previewModel else { return event }
+
+            let rootLocal = rootView.convert(event.locationInWindow, from: nil)
+            if rootView.navBar.frame.contains(rootLocal) { return event }
+
+            if event.type == .leftMouseDown, event.clickCount != 1 { return event }
+
+            guard let contentView = self.hostingController?.view else { return event }
+            let local = contentView.convert(event.locationInWindow, from: nil)
+            guard contentView.bounds.contains(local) else { return event }
+
+            model.selectNode(
+                at: Self.swiftUIPoint(in: contentView, windowLocation: event.locationInWindow),
+                in: contentView.bounds.size
+            )
+            return event
+        }
+    }
+
+    private func removeClickMonitor() {
+        if let clickMonitor {
+            NSEvent.removeMonitor(clickMonitor)
+            self.clickMonitor = nil
+        }
+    }
+
     private func installDoubleClickMonitor() {
         removeDoubleClickMonitor()
 
-        // Mouse-up only. A mouse-down monitor runs on every click in the window and makes nav feel laggy.
+        // Mouse-up only. A window-wide mouse-down monitor delays every nav click in Quick Look.
         doubleClickUpMonitor = NSEvent.addLocalMonitorForEvents(matching: [.leftMouseUp]) { [weak self] event in
             guard event.clickCount >= 2 else { return event }
             guard let self else { return event }
@@ -176,7 +218,10 @@ public class PreviewViewController: NSViewController, @preconcurrency QLPreviewi
             guard let rootView = self.rootView else { return event }
 
             let rootLocal = rootView.convert(event.locationInWindow, from: nil)
-            if rootView.navBar.frame.contains(rootLocal) { return event }
+            guard rootView.bounds.contains(rootLocal) else { return event }
+
+            // Swallow nav-bar double-clicks so Quick Look cannot uncompress the archive.
+            if rootView.navBar.frame.contains(rootLocal) { return nil }
 
             guard let contentView = self.hostingController?.view else { return event }
 
