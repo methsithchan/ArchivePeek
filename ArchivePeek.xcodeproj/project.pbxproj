@@ -7,14 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0181EB54D824522933BFDD04 /* ArchiveAppKitNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852AAB61E2455AAF9063EBBB /* ArchiveAppKitNavBar.swift */; };
 		01DEC43715E391C947CD80B0 /* ArchiveNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09CDD3E57242E643752BA46 /* ArchiveNode.swift */; };
 		0252337E5EBBD46577E14A72 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6455C5EE9F033EC95FB6CDBB /* MainView.swift */; };
 		14B899068BC16F1471C0812E /* ArchivePeekPreview.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = D1B96E0158ED4CF4A01AB3E6 /* ArchivePeekPreview.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		25B33BA595CBDF07BE4BD6EE /* ArchiveNodeIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8BE33014E460A2720BBCFF /* ArchiveNodeIcon.swift */; };
+		2EE19164AC82D7562E4CE4AF /* ArchiveFolderPane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA9663E2CA28BEFAB4348C1 /* ArchiveFolderPane.swift */; };
 		36A7B870B2BB014D67C21429 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C24B376080BB7CD985DFBF4 /* PreviewViewController.swift */; };
 		446FC56F1D4F3BD90B803483 /* ArchivePeekApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D4E6AB624C01A508C91C6D /* ArchivePeekApp.swift */; };
+		5FF51323457CB724836FFE70 /* ArchiveNavigationHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF14F73B3ABDB5B06DB4AFF /* ArchiveNavigationHistory.swift */; };
 		6A98639D369A2758C35ECD4A /* PreviewContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90899C859B2D50A188AD95FD /* PreviewContentView.swift */; };
-		72EB2F0246EC7260FE55EDF7 /* ArchiveNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDD9B18A91ACD6E7BDC94C4 /* ArchiveNavigationBar.swift */; };
 		9081BAC25F7476AEAD6669C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A194A01CB6213508D48B088 /* Assets.xcassets */; };
 		968198390915BE6C23BE3895 /* ArchiveIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2489CC62CC9C8B94BE08A149 /* ArchiveIconView.swift */; };
 		BB13C4DF7F9B13BCF15A1186 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5267E15BFCAE2BDF56B9E01E /* OnboardingView.swift */; };
@@ -52,17 +54,19 @@
 		2489CC62CC9C8B94BE08A149 /* ArchiveIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveIconView.swift; sourceTree = "<group>"; };
 		2E84B5C9D03A14E025287428 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		2EA84071A72366CDADC18697 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		3EF14F73B3ABDB5B06DB4AFF /* ArchiveNavigationHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveNavigationHistory.swift; sourceTree = "<group>"; };
 		46A0CE536DAF9B09463ABCA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		5267E15BFCAE2BDF56B9E01E /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		6455C5EE9F033EC95FB6CDBB /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		6C24B376080BB7CD985DFBF4 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		6CF999D1F9C54425D25FE75E /* ArchivePeek.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArchivePeek.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DA9663E2CA28BEFAB4348C1 /* ArchiveFolderPane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveFolderPane.swift; sourceTree = "<group>"; };
+		852AAB61E2455AAF9063EBBB /* ArchiveAppKitNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveAppKitNavBar.swift; sourceTree = "<group>"; };
 		8A39DBED30DD8E697E9ED70A /* ArchiveReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveReader.swift; sourceTree = "<group>"; };
 		90899C859B2D50A188AD95FD /* PreviewContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContentView.swift; sourceTree = "<group>"; };
 		A09CDD3E57242E643752BA46 /* ArchiveNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveNode.swift; sourceTree = "<group>"; };
 		B5D4E6AB624C01A508C91C6D /* ArchivePeekApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivePeekApp.swift; sourceTree = "<group>"; };
 		C7D70DD00780241D09265B45 /* ArchivePreviewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivePreviewCoordinator.swift; sourceTree = "<group>"; };
-		CBDD9B18A91ACD6E7BDC94C4 /* ArchiveNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveNavigationBar.swift; sourceTree = "<group>"; };
 		D1B96E0158ED4CF4A01AB3E6 /* ArchivePeekPreview.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ArchivePeekPreview.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFDAC822E53526EF9DFBA29F /* ArchivePreviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivePreviewModel.swift; sourceTree = "<group>"; };
 		FD8BE33014E460A2720BBCFF /* ArchiveNodeIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveNodeIcon.swift; sourceTree = "<group>"; };
@@ -101,8 +105,10 @@
 		D7E970D6E697EE4F9878153E /* ArchivePeekPreview */ = {
 			isa = PBXGroup;
 			children = (
+				852AAB61E2455AAF9063EBBB /* ArchiveAppKitNavBar.swift */,
+				6DA9663E2CA28BEFAB4348C1 /* ArchiveFolderPane.swift */,
 				2489CC62CC9C8B94BE08A149 /* ArchiveIconView.swift */,
-				CBDD9B18A91ACD6E7BDC94C4 /* ArchiveNavigationBar.swift */,
+				3EF14F73B3ABDB5B06DB4AFF /* ArchiveNavigationHistory.swift */,
 				A09CDD3E57242E643752BA46 /* ArchiveNode.swift */,
 				FD8BE33014E460A2720BBCFF /* ArchiveNodeIcon.swift */,
 				C7D70DD00780241D09265B45 /* ArchivePreviewCoordinator.swift */,
@@ -204,8 +210,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0181EB54D824522933BFDD04 /* ArchiveAppKitNavBar.swift in Sources */,
+				2EE19164AC82D7562E4CE4AF /* ArchiveFolderPane.swift in Sources */,
 				968198390915BE6C23BE3895 /* ArchiveIconView.swift in Sources */,
-				72EB2F0246EC7260FE55EDF7 /* ArchiveNavigationBar.swift in Sources */,
+				5FF51323457CB724836FFE70 /* ArchiveNavigationHistory.swift in Sources */,
 				01DEC43715E391C947CD80B0 /* ArchiveNode.swift in Sources */,
 				25B33BA595CBDF07BE4BD6EE /* ArchiveNodeIcon.swift in Sources */,
 				F9EDE59CB68A9E4F96978771 /* ArchivePreviewCoordinator.swift in Sources */,

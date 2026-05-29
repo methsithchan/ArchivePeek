@@ -7,13 +7,16 @@ final class ArchivePreviewModel: ObservableObject {
     let rootNode: ArchiveNode
     let archiveURL: URL
 
-    @Published var pathStack: [ArchiveNode] = []
+    @Published private(set) var displayedNodes: [ArchiveNode] = []
     @Published var selectedNodeIds: Set<UUID> = []
     @Published var bannerMessage: String?
-    @Published var headerHeight: CGFloat = ArchivePreviewModel.navigationBarHeight
+    @Published var headerHeight: CGFloat = 0
 
-    private var backStack: [[ArchiveNode]] = []
-    private var forwardStack: [[ArchiveNode]] = []
+    /// Called after back/forward navigation so AppKit nav can update without observing every model change.
+    var onNavigationStateChanged: (() -> Void)?
+
+    private var pathStack: [ArchiveNode] = []
+    private var navigationHistory = ArchiveNavigationHistory()
     private var pasteboardItems: [URL] = []
     private var lastSelectedNodeId: UUID?
     private var lastSelectionTime: Date = .distantPast
@@ -26,6 +29,7 @@ final class ArchivePreviewModel: ObservableObject {
     init(rootNode: ArchiveNode, archiveURL: URL) {
         self.rootNode = rootNode
         self.archiveURL = archiveURL
+        self.displayedNodes = rootNode.children
     }
 
     var archiveDisplayName: String {
@@ -36,12 +40,12 @@ final class ArchivePreviewModel: ObservableObject {
         pathStack.last ?? rootNode
     }
 
-    var displayedNodes: [ArchiveNode] {
-        currentNode.children
+    var currentFolderID: UUID {
+        currentNode.id
     }
 
     var canGoUp: Bool { !pathStack.isEmpty }
-    var canGoForward: Bool { !forwardStack.isEmpty }
+    var canGoForward: Bool { navigationHistory.canGoForward }
 
     var contentTopInset: CGFloat {
         headerHeight
@@ -80,19 +84,15 @@ final class ArchivePreviewModel: ObservableObject {
         }
     }
 
-    /// Called from Quick Look's mouse monitor — always blocks archive-wide extract when in content.
+    /// Called from Quick Look's mouse monitor. Swallowing is handled in PreviewViewController.
     func handleDoubleClick(at point: CGPoint) {
         guard point.y >= contentTopInset else { return }
 
-        guard Date().timeIntervalSince(lastSelectionTime) < 0.75 else { return }
-
-        let candidateID = selectedNodeIds.first ?? lastSelectedNodeId
-        guard let candidateID,
-              let node = displayedNodes.first(where: { $0.id == candidateID }) else {
-            return
+        if Date().timeIntervalSince(lastSelectionTime) < 1.5,
+           let id = selectedNodeIds.first ?? lastSelectedNodeId,
+           let node = displayedNodes.first(where: { $0.id == id }) {
+            activate(node)
         }
-
-        activate(node)
     }
 
     func openNode(_ node: ArchiveNode) {
@@ -104,21 +104,17 @@ final class ArchivePreviewModel: ObservableObject {
     func navigateUp() {
         guard !pathStack.isEmpty else { return }
         withoutAnimation {
-            backStack.append(pathStack)
-            forwardStack.removeAll()
-            pathStack.removeLast()
-            selectedNodeIds.removeAll()
-            lastSelectedNodeId = nil
+            navigationHistory.pushForward(pathNames(for: pathStack))
+            var stack = pathStack
+            stack.removeLast()
+            applyNavigation(to: stack)
         }
     }
 
     func navigateForward() {
-        guard !forwardStack.isEmpty else { return }
+        guard let pathNames = navigationHistory.takeForward() else { return }
         withoutAnimation {
-            backStack.append(pathStack)
-            pathStack = forwardStack.removeLast()
-            selectedNodeIds.removeAll()
-            lastSelectedNodeId = nil
+            applyNavigation(to: ArchivePathResolver.nodes(from: pathNames, startingAt: rootNode))
         }
     }
 
@@ -144,12 +140,34 @@ final class ArchivePreviewModel: ObservableObject {
 
     private func diveIntoDirectory(_ node: ArchiveNode) {
         withoutAnimation {
-            backStack.append(pathStack)
-            forwardStack.removeAll()
+            navigationHistory.clearForward()
             pathStack.append(node)
-            selectedNodeIds.removeAll()
-            lastSelectedNodeId = nil
+            displayedNodes = node.children
+            if !selectedNodeIds.isEmpty {
+                clearSelection()
+            }
         }
+        onNavigationStateChanged?()
+    }
+
+    private func applyNavigation(to stack: [ArchiveNode]) {
+        withoutAnimation {
+            pathStack = stack
+            displayedNodes = (stack.last ?? rootNode).children
+            if !selectedNodeIds.isEmpty {
+                clearSelection()
+            }
+        }
+        onNavigationStateChanged?()
+    }
+
+    private func clearSelection() {
+        selectedNodeIds.removeAll()
+        lastSelectedNodeId = nil
+    }
+
+    private func pathNames(for stack: [ArchiveNode]) -> [String] {
+        stack.map(\.name)
     }
 
     private func withoutAnimation(_ updates: () -> Void) {

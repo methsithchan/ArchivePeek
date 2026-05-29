@@ -11,29 +11,18 @@ struct MainView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            headerBar
-
-            ArchiveIconView(
-                nodes: model.displayedNodes,
-                selection: model.selectedNodeIds,
-                onSelect: model.selectNode(_:extendSelection:),
-                onActivate: model.activate(_:),
-                onOpen: model.openNode(_:),
-                onCopy: model.copyNode(_:),
-                onExtract: model.extractWithSavePanel(node:)
-            )
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .clipped()
-            .background(.windowBackground)
+            if let bannerMessage = model.bannerMessage {
+                Text(bannerMessage)
+                    .font(.callout)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 6)
+                    .background(.bar)
+            }
+            ArchiveFolderPane(model: model)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.windowBackground)
-        .background(
-            ArchiveKeyboardMonitor(
-                onCopy: model.copySelectedItems,
-                onNavigateUp: model.navigateUpIfPossible,
-                onNavigateForward: model.navigateForwardIfPossible
-            )
-        )
         .onCopyCommand {
             model.copySelectedItems()
             return []
@@ -44,39 +33,11 @@ struct MainView: View {
         .onDisappear {
             coordinator.previewModel = nil
         }
-        .onChange(of: model.selectedNodeIds) { _, _ in
-            model.noteSelection()
-        }
         .onChange(of: model.bannerMessage) { _, message in
-            model.headerHeight = message != nil
-                ? ArchivePreviewModel.navigationBarHeight + ArchivePreviewModel.bannerHeight
-                : ArchivePreviewModel.navigationBarHeight
+            model.headerHeight = message != nil ? ArchivePreviewModel.bannerHeight : 0
         }
         .transaction { transaction in
             transaction.animation = nil
         }
-    }
-
-    private var headerBar: some View {
-        VStack(spacing: 0) {
-            ArchiveNavigationBar(
-                canGoUp: model.canGoUp,
-                canGoForward: model.canGoForward,
-                onGoUp: model.navigateUp,
-                onGoForward: model.navigateForward
-            )
-            .archiveNavBarStyle()
-
-            if let bannerMessage = model.bannerMessage {
-                Text(bannerMessage)
-                    .font(.callout)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 6)
-                    .background(.bar)
-            }
-        }
-        .fixedSize(horizontal: false, vertical: true)
-        .zIndex(1)
     }
 }

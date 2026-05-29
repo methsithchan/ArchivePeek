@@ -57,12 +57,6 @@ struct ArchiveIconView: View {
             .background(isSelected ? Color.accentColor.opacity(0.15) : .clear, in: RoundedRectangle(cornerRadius: 8))
         }
         .buttonStyle(.plain)
-        .simultaneousGesture(
-            TapGesture(count: 2).onEnded {
-                onSelect(node, false)
-                onActivate(node)
-            }
-        )
         .contextMenu {
             if node.isDirectory {
                 Button("Open") { onOpen(node) }
